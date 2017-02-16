@@ -10,15 +10,19 @@ import UIKit
 import MBProgressHUD
 
 // Main ViewController
-class RepoResultsViewController: UIViewController {
+class RepoResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
     var searchBar: UISearchBar!
     var searchSettings = GithubRepoSearchSettings()
 
-    var repos: [GithubRepo]!
+    var repos: [GithubRepo]! = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
+        
 
         // Initialize the UISearchBar
         searchBar = UISearchBar()
@@ -30,6 +34,32 @@ class RepoResultsViewController: UIViewController {
 
         // Perform the first search when the view controller first loads
         doSearch()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GitHubTableViewCell", for: indexPath) as! GitHubTableViewCell
+        let repo = repos[indexPath.row]
+        cell.nameLabel.text = repo.name
+        cell.descrLabel.text = repo.repoDescription!
+        cell.forksLabel.text = "\(repo.forks!)"
+        cell.starsLabel.text = "\(repo.stars!)"
+        cell.ownerLabel.text = "by \(repo.ownerHandle!)"
+        cell.avatarImageView.setImageWith(URL(string: repo.ownerAvatarURL!)!)
+        
+        
+        
+        
+
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.repos.count
     }
 
     // Perform the search.
@@ -41,7 +71,9 @@ class RepoResultsViewController: UIViewController {
         GithubRepo.fetchRepos(searchSettings, successCallback: { (newRepos) -> Void in
 
             // Print the returned repositories to the output window
-            for repo in newRepos {
+            self.repos = newRepos
+            self.tableView.reloadData()
+            for repo in self.repos {
                 print(repo)
             }   
 
