@@ -2,7 +2,7 @@
 
 **GitHub Repo Finder** is a GitHub Repo search app using the [GitHub API](https://developer.github.com/v3/search/#search-repositories).
 
-Time spent: **X** hours spent in total
+Time spent: **1** hours spent in total
 
 ## User Stories
 
@@ -14,14 +14,13 @@ The following **required** functionality is completed:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. 
-2.
+1. More on resizing table view cells automatically
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://cloud.githubusercontent.com/assets/14018274/23052299/3deb56b4-f49e-11e6-97a7-6a8d26758b54.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
